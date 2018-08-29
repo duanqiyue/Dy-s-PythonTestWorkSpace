@@ -50,7 +50,7 @@ def search_file():
         i=i+1
         if i==5:
             print('sleep...')
-            time.sleep(15)
+            time.sleep(6)
             print('end...')
             i=0
         nPos=keyword.find('\n')

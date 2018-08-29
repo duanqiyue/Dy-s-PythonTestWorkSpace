@@ -28,7 +28,7 @@ def deal_key():
    #      return
     x=1
     page_num = 1;
-    while x<=20:
+    while x<=5:
         htmlpage=baidu_search(str(x))
         soup=BeautifulSoup(htmlpage)
         for item in soup.findAll("li", {"class": "lx0"}):                #这个格式应该参考百度网页布局
