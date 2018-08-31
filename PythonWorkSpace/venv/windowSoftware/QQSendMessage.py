@@ -1,5 +1,7 @@
 #coding:utf-8
 from Tkinter import *
+import time
+import QqSendMessage_Music as qsm
 
 
 class TestTK:
@@ -8,17 +10,14 @@ class TestTK:
         tk.title(title)
         #tk.geometry('350x150')  初始大小
         tk.iconbitmap('logo.ico')
-
-
         # 创建一个容器,
         montyMain = LabelFrame(tk, text="")  # 创建一个容器，其父容器为tk
         montyMain.grid(padx=10, pady=10)  # padx  pady   该容器外围需要留出的空余空间
         # 左容器
         montyLeft = LabelFrame(montyMain, text="请输入要发送的内容，一行为一条信息")  # 创建一个容器，其父容器为tk
         montyLeft.grid(column=0,row=0)  # padx  pady   该容器外围需要留出的空余空间
-        txtMsgList = Text(montyLeft, width=50)
+        txtMsgList = Text(montyLeft, width=50,height=40)
         txtMsgList.grid(column=0,row=1)
-
         # 右容器
         montyRight = LabelFrame(montyMain, text="设置发送的人（备注）") # 创建一个容器，其父容器为tk
         montyRight.grid(column=1,row=0,sticky="n")  # padx  pady   该容器外围需要留出的空余空间
@@ -29,15 +28,15 @@ class TestTK:
         nameEntered.focus()  # 当程序运行时,光标默认会出现在该文本框中
         # 点击方法
         def clickMe():
-            str = txtMsgList.get("0.0", "end")
-            print "内容："
-            print str
-            print "对象："+name.get()
-
+            text_str = txtMsgList.get("0.0", "end")
+            name_str = name.get()
+            for text_str_line in text_str.split('\n'):
+                time.sleep(0.3)
+                qsm.sendMessageBy770(text_str_line,name_str)
+            print "完成！"
         # 按钮
         action = Button(montyRight,text="开始",command=clickMe,width=15,height=5)  # 创建一个按钮, text：显示按钮上面显示的文字, command：当这个按钮被点击之后会调用command函数
         action.grid()  # 设置其在界面中出现的位置  column代表列   row 代表行
-
         Label(text="制作人：STR-ddddddddddddddddddy").grid()
         mainloop()
 
