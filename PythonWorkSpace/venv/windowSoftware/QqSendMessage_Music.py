@@ -27,7 +27,7 @@ class Message:
                 self.sendMessageBy770(text_str_line, name_str)
             else:
                 break
-        print "完成！"
+        print "Over!"
 
     def sendMessageBy770(self,text,winName):
         #设置剪贴板
@@ -53,4 +53,11 @@ class Message:
             str += item.get_text().encode('utf-8')
 
         return str
+
+    def searchPoetryText(self,key_words):
+        url = 'https://so.gushiwen.org/search.aspx?value='+key_words
+        html = urllib2.urlopen(url).read()
+        soup = BeautifulSoup(html)
+        str = ""
+        print str
 

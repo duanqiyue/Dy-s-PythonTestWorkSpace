@@ -35,13 +35,13 @@ class TestTK:
             self.ClickMeForSend(txtMsgList.get("0.0", "end"),name.get())
         # 开始按钮
         action = Button(montyRight,text="开始", command=ClickMeForSend,width=7)  # 创建一个按钮, text：显示按钮上面显示的文字, command：当这个按钮被点击之后会调用command函数
-        action.grid(column=1,columnspan = 2,row=1,padx = 5 ,pady=10,sticky=N)  # 设置其在界面中出现的位置  column代表列   row 代表行
+        action.grid(column=1,columnspan = 2,row=1,padx = 5 ,pady=10,sticky=N)
         # 暂停事件
         def ClickMeForSuspend():
             self.ClickMeForSuspend()
         # 暂停按钮
-        ca = Button(montyRight, text="停止", command=ClickMeForSuspend, width=7)  # 创建一个按钮, text：显示按钮上面显示的文字, command：当这个按钮被点击之后会调用command函数
-        ca.grid(column=2, row=1,pady=10,sticky=N)  # 设置其在界面中出现的位置  column代表列   row 代表行
+        ca = Button(montyRight, text="停止", command=ClickMeForSuspend, width=7)
+        ca.grid(column=2, row=1,pady=10,sticky=N)
         # 歌曲提示
         Label(montyRight,text="输入歌曲名查找歌词").grid(column=0, row=2,columnspan=3,sticky="W")
         # 歌曲文本框
@@ -53,10 +53,7 @@ class TestTK:
             txtMsgList.insert('insert', self.ClickMeForSearchMusic(musicName.get()))
         # 查找歌词按钮
         Button(montyRight,text="查找",command=SearchMusic,width=7).grid(column=2,row=3)
-
         Label(tk,text="Producer：STR-DY").grid(column=0,columnspan=2,row=1,sticky=E)
-
-
         mainloop()
 
 
