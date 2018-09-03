@@ -24,22 +24,26 @@ class TestTK:
         # 文本框
         name = StringVar()  # StringVar是Tk库内部定义的字符串变量类型，在这里用于管理部件上面的字符；不过一般用在按钮button上。改变StringVar，按钮上的文字也随之改变。
         nameEntered = Entry(montyRight, width=30,textvariable=name)  # 创建一个文本框，定义长度为12个字符长度，并且将文本框中的内容绑定到上一句定义的name变量上，方便clickMe调用
-        nameEntered.grid()  # 设置其在界面中出现的位置  column代表列   row 代表行
+        nameEntered.grid(column=0,row=0,columnspan=2)  # 设置其在界面中出现的位置  column代表列   row 代表行
         nameEntered.focus()  # 当程序运行时,光标默认会出现在该文本框中
         # 点击方法
+        sendFlag = True
         def clickMe():
             text_str = txtMsgList.get("0.0", "end")
             name_str = name.get()
             for text_str_line in text_str.split('\n'):
                 time.sleep(0.3)
-                qsm.sendMessageBy770(text_str_line,name_str)
+                if sendFlag:
+                    qsm.sendMessageBy770(text_str_line, name_str)
+                else:
+                    break
             print "完成！"
+
         # 按钮
-        action = Button(montyRight,text="开始",command=clickMe,width=15,height=5)  # 创建一个按钮, text：显示按钮上面显示的文字, command：当这个按钮被点击之后会调用command函数
-        action.grid()  # 设置其在界面中出现的位置  column代表列   row 代表行
+        action = Button(montyRight,text="开始",command=clickMe,width=7,height=3)  # 创建一个按钮, text：显示按钮上面显示的文字, command：当这个按钮被点击之后会调用command函数
+        action.grid(column=0,row=1,pady=30,sticky=S)  # 设置其在界面中出现的位置  column代表列   row 代表行
+
+        ca = Button(montyRight, text="暂停", command=suspend, width=7,height=3)  # 创建一个按钮, text：显示按钮上面显示的文字, command：当这个按钮被点击之后会调用command函数
+        ca.grid(column=1, row=1,pady=30,sticky=S)  # 设置其在界面中出现的位置  column代表列   row 代表行
         Label(text="制作人：STR-ddddddddddddddddddy").grid()
         mainloop()
-
-
-w1 = TestTK().createTk("QQ自动发送消息    v0.0.1")
-
