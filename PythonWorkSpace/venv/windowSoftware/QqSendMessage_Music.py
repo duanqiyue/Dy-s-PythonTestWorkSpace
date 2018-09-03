@@ -5,6 +5,10 @@ import win32con
 import win32api
 import win32clipboard as w
 import time
+import sys
+import urllib2
+import bs4
+from bs4 import BeautifulSoup
 
 class Message:
     sendFlag = True
@@ -39,3 +43,14 @@ class Message:
         # # 模拟按下回车键
         win32api.keybd_event(win32con.VK_RETURN, 0, 0, 0)  # 键盘按下  68  D
         win32api.keybd_event(win32con.VK_RETURN, 0, win32con.KEYEVENTF_KEYUP, 0)  # 键盘松开  D 68
+
+    def searchMusicText(self,key_words):
+        url = 'http://www.baidu.com/s?wd=' + key_words + '&pn=1'
+        html = urllib2.urlopen(url).read()
+        soup = BeautifulSoup(html)
+        str = ""
+        for item in soup.findAll("p", {"class": "wa-musicsong-lyric-line"}):  # 这个格式应该参考百度网页布局
+            str += item.get_text().encode('utf-8')
+
+        return str
+

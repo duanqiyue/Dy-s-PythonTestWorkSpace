@@ -27,23 +27,36 @@ class TestTK:
         montyRight.grid(column=1,row=0,sticky="n")  # padx  pady   该容器外围需要留出的空余空间
         # 文本框
         name = StringVar()  # StringVar是Tk库内部定义的字符串变量类型，在这里用于管理部件上面的字符；不过一般用在按钮button上。改变StringVar，按钮上的文字也随之改变。
-        nameEntered = Entry(montyRight, width=30,textvariable=name)  # 创建一个文本框，定义长度为12个字符长度，并且将文本框中的内容绑定到上一句定义的name变量上，方便clickMe调用
-        nameEntered.grid(column=0,row=0,columnspan=2)  # 设置其在界面中出现的位置  column代表列   row 代表行
+        nameEntered = Entry(montyRight, width=40,textvariable=name)  # 创建一个文本框，定义长度为12个字符长度，并且将文本框中的内容绑定到上一句定义的name变量上，方便clickMe调用
+        nameEntered.grid(column=0,row=0,columnspan=3)  # 设置其在界面中出现的位置  column代表列   row 代表行
         nameEntered.focus()  # 当程序运行时,光标默认会出现在该文本框中
         # 开始事件
         def ClickMeForSend():
             self.ClickMeForSend(txtMsgList.get("0.0", "end"),name.get())
         # 开始按钮
-        action = Button(montyRight,text="开始", command=ClickMeForSend,width=7,height=3)  # 创建一个按钮, text：显示按钮上面显示的文字, command：当这个按钮被点击之后会调用command函数
-        action.grid(column=0,row=1,pady=30,sticky=S)  # 设置其在界面中出现的位置  column代表列   row 代表行
+        action = Button(montyRight,text="开始", command=ClickMeForSend,width=7)  # 创建一个按钮, text：显示按钮上面显示的文字, command：当这个按钮被点击之后会调用command函数
+        action.grid(column=1,columnspan = 2,row=1,padx = 5 ,pady=10,sticky=N)  # 设置其在界面中出现的位置  column代表列   row 代表行
         # 暂停事件
         def ClickMeForSuspend():
             self.ClickMeForSuspend()
         # 暂停按钮
-        ca = Button(montyRight, text="停止", command=ClickMeForSuspend, width=7,height=3)  # 创建一个按钮, text：显示按钮上面显示的文字, command：当这个按钮被点击之后会调用command函数
-        ca.grid(column=1, row=1,pady=30,sticky=S)  # 设置其在界面中出现的位置  column代表列   row 代表行
-        # 底部标题
-        Label(text="制作人：STR-ddddddddddddddddddy").grid()
+        ca = Button(montyRight, text="停止", command=ClickMeForSuspend, width=7)  # 创建一个按钮, text：显示按钮上面显示的文字, command：当这个按钮被点击之后会调用command函数
+        ca.grid(column=2, row=1,pady=10,sticky=N)  # 设置其在界面中出现的位置  column代表列   row 代表行
+        # 歌曲提示
+        Label(montyRight,text="输入歌曲名查找歌词").grid(column=0, row=2,columnspan=3,sticky="W")
+        # 歌曲文本框
+        musicName = StringVar()
+        musicNameEntry = Entry(montyRight,width=30,textvariable=musicName)
+        musicNameEntry.grid(column=0,row=3,columnspan=2)
+        # 查找歌词事件
+        def SearchMusic():
+            txtMsgList.insert('insert', self.ClickMeForSearchMusic(musicName.get()))
+        # 查找歌词按钮
+        Button(montyRight,text="查找",command=SearchMusic,width=7).grid(column=2,row=3)
+
+        Label(tk,text="Producer：STR-DY").grid(column=0,columnspan=2,row=1,sticky=E)
+
+
         mainloop()
 
 
@@ -55,5 +68,8 @@ class TestTK:
     def ClickMeForSuspend(self):
         thread.start_new_thread(self.message.suspend, ("","",""))
 
+    def ClickMeForSearchMusic(self,musicNameText):
+        key_words = musicNameText.encode("utf-8") + "歌词"
+        return self.message.searchMusicText(key_words)
 
 
