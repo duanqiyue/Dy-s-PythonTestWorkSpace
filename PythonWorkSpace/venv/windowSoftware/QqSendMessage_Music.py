@@ -54,10 +54,32 @@ class Message:
 
         return str
 
-    def searchPoetryText(self,key_words):
-        url = 'https://so.gushiwen.org/search.aspx?value='+key_words
+    def searchLoveWrod(self,url):
         html = urllib2.urlopen(url).read()
         soup = BeautifulSoup(html)
         str = ""
-        print str
+        div = soup.find("div", {"class": "content"})
+        for item in div.findAll("p"):
+            item_text = item.get_text()
+            if len(item_text)!=0:
+                item_text_start = item_text[0:1].encode('utf-8')
+                item_text_start_2 = item_text[1:2].encode('utf-8')
+                if item_text_start_2=="1"or item_text_start_2=="2" or item_text_start_2=="3" or item_text_start_2=="4" or item_text_start_2=="5" or item_text_start_2=="6" or item_text_start_2=="7" or item_text_start_2=="8" or item_text_start_2=="9":
+                    str += item_text[3:len(item_text)].encode('utf-8') + "\r\n"
+                elif item_text_start=="1"or item_text_start=="2" or item_text_start=="3" or item_text_start=="4" or item_text_start=="5" or item_text_start=="6" or item_text_start=="7" or item_text_start=="8" or item_text_start=="9":
+                    str += item_text[2:len(item_text)].encode('utf-8') + "\r\n"
+                else :
+                    str += item_text[0:len(item_text)].encode('utf-8') + "\r\n"
+
+        return str
+
+
+
+    # def searchPoetryText(self,key_words):
+    #     url = 'https://so.gushiwen.org/search.aspx?value='+key_words
+    #     html = urllib2.urlopen(url).read()
+    #     soup = BeautifulSoup(html)
+    #     str = ""
+    #     print str
+
 

@@ -1,5 +1,6 @@
 #coding:utf-8
 from Tkinter import *
+import Tkinter
 import time
 import thread
 import QqSendMessage_Music as qsmm
@@ -20,7 +21,7 @@ class TestTK:
         montyLeft = LabelFrame(montyMain, text="请输入要发送的内容，一行为一条信息")  # 创建一个容器，其父容器为tk
         montyLeft.grid(column=0,row=0)  # padx  pady   该容器外围需要留出的空余空间
         # 文本域
-        txtMsgList = Text(montyLeft, width=50,height=40)
+        txtMsgList = Text(montyLeft, width=80,height=40)
         txtMsgList.grid(column=0,row=1)
         # 右容器
         montyRight = LabelFrame(montyMain, text="设置发送的人（备注）") # 创建一个容器，其父容器为tk
@@ -50,11 +51,26 @@ class TestTK:
         musicNameEntry.grid(column=0,row=3,columnspan=2)
         # 查找歌词事件
         def SearchMusic():
+            txtMsgList.delete(1.0, Tkinter.END)
             txtMsgList.insert('insert', self.ClickMeForSearchMusic(musicName.get()))
         # 查找歌词按钮
-        Button(montyRight,text="查找",command=SearchMusic,width=7).grid(column=2,row=3)
+        Button(montyRight,text="查找",command=SearchMusic,width=7).grid(column=2,row=3,pady=15)
+
+        # 土味情话事件
+        def SearchLover():
+            txtMsgList.delete(1.0, Tkinter.END)
+            txtMsgList.insert('insert',self.ClickMeForSearchLoveWrod())
+        # 土味情话提示
+        Label(montyRight, text="数据来自http://www.gexings.com").grid(column=0, row=4, columnspan=4, sticky="W")
+        # 查找歌词按钮
+        Button(montyRight, text="一键生成土味情话", command=SearchLover,width=40).grid(column=0, row=5,columnspan=3)
+
+
         Label(tk,text="Producer：STR-DY").grid(column=0,columnspan=2,row=1,sticky=E)
         mainloop()
+
+
+
 
 
     # 点击方法：开始
@@ -68,5 +84,22 @@ class TestTK:
     def ClickMeForSearchMusic(self,musicNameText):
         key_words = musicNameText.encode("utf-8") + "歌词"
         return self.message.searchMusicText(key_words)
+
+    def ClickMeForSearchLoveWrod(self):
+        str = ""
+        url_maps = ["http://www.gexings.com/aiqing/63688.html",
+               "http://www.gexings.com/aiqing/63689.html",
+               "http://www.gexings.com/aiqing/63687.html",
+               "http://www.gexings.com/aiqing/63574.html",
+               "http://www.gexings.com/aiqing/63573.html",
+               "http://www.gexings.com/aiqing/63571.html",
+               "http://www.gexings.com/aiqing/63572.html",
+               "http://www.gexings.com/aiqing/63567.html",
+               "http://www.gexings.com/aiqing/63569.html",
+               "http://www.gexings.com/aiqing/63570.html",
+               "http://www.gexings.com/aiqing/63522.html",]
+        for url_item in url_maps:
+            str += self.message.searchLoveWrod(url_item)
+        return str
 
 
