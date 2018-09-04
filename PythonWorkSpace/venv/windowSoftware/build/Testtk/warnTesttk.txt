@@ -11,6 +11,11 @@ missing module named os2 - imported by os
 missing module named pwd - imported by posixpath, getpass, shutil, tarfile
 missing module named posix - imported by os
 missing module named resource - imported by posix, test.support
+missing module named _scproxy - imported by urllib, future.backports.urllib.request
+missing module named EasyDialogs - imported by getpass
+missing module named termios - imported by getpass
+missing module named SOCKS - imported by ftplib
+missing module named rourl2path - imported by urllib
 missing module named 'collections.abc' - imported by bs4.element, bs4.builder._lxml
 missing module named iconv_codec - imported by bs4.dammit
 missing module named cchardet - imported by bs4.dammit
@@ -44,9 +49,4 @@ missing module named winreg.OpenKeyEx - imported by winreg, platform
 missing module named _datetime - imported by future.backports.datetime
 missing module named reprlib.recursive_repr - imported by reprlib, future.backports.misc
 missing module named _thread.get_ident - imported by _thread, future.backports.misc
-missing module named _scproxy - imported by urllib, future.backports.urllib.request
-missing module named EasyDialogs - imported by getpass
-missing module named termios - imported by getpass
-missing module named SOCKS - imported by ftplib
 missing module named _dummy_threading - imported by dummy_threading
-missing module named rourl2path - imported by urllib

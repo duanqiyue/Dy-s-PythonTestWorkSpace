@@ -1,5 +1,6 @@
 #coding:utf-8
 from Tkinter import *
+from tkMessageBox import *
 import Tkinter
 import time
 import thread
@@ -63,15 +64,35 @@ class TestTK:
         # 土味情话提示
         Label(montyRight, text="数据来自http://www.gexings.com").grid(column=0, row=4, columnspan=4, sticky="W")
         # 查找歌词按钮
-        Button(montyRight, text="一键生成土味情话", command=SearchLover,width=40).grid(column=0, row=5,columnspan=3)
+        Button(montyRight, text="一键生成土味情话", command=SearchLover,width=40).grid(column=0, row=5,columnspan=3,pady=15)
 
+        # 投稿提示
+        Label(montyRight, text="同时也希望您提出意见给我们:").grid(column=0, row=6, columnspan=4, sticky="W")
+        Label(montyRight, text="或者也可以写出土味情话给我们:").grid(column=0, row=7, columnspan=4, sticky="W")
+        # 投稿文本框
+        LoverEmailTextEntry = Text(montyRight, width=40, height=15)
+        LoverEmailTextEntry.grid(column=0, row=8,columnspan=3)
 
-        Label(tk,text="Producer：STR-DY").grid(column=0,columnspan=2,row=1,sticky=E)
+        # 点击投稿事件
+        def sendLover():
+            if len(LoverEmailTextEntry.get("0.0", "end").replace("\n",""))==0:
+                showinfo('提示', '请填入些许内容')
+            else :
+                self.ClickMeToEmailWithLoverWords(LoverEmailTextEntry.get("0.0", "end"))
+                LoverEmailTextEntry.delete(1.0, Tkinter.END)
+                showinfo('成功', '感谢您的投稿（建议）我们会认真参考的！')
+
+        # 查找歌词按钮
+        Button(montyRight, text="投稿", command=sendLover, width=40).grid(column=0, row=9, columnspan=3,pady=5)
+
+        Label(tk, text="Producer：STR-DY").grid(column=0, columnspan=2, row=1, sticky=E)
+        Label(tk, text="Contact us by QQ：812380163").grid(column=0, columnspan=2, row=2, sticky=E)
         mainloop()
 
 
-
-
+    # 发送投稿邮件
+    def ClickMeToEmailWithLoverWords(self,loverWords):
+        self.message.sendEamil(loverWords)
 
     # 点击方法：开始
     def ClickMeForSend(self,a,b):

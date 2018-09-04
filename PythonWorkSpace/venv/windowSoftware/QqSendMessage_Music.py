@@ -9,6 +9,9 @@ import sys
 import urllib2
 import bs4
 from bs4 import BeautifulSoup
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
 
 class Message:
     sendFlag = True
@@ -72,6 +75,24 @@ class Message:
                     str += item_text[0:len(item_text)].encode('utf-8') + "\r\n"
 
         return str
+
+    def sendEamil(self,loverWordsToEmail):
+        sender = 'duanqiyue666@163.com'
+        receiver = '812380163@qq.com'
+        subject = '土味情话投稿'
+        username = 'duanqiyue666@163.com'
+        password = 'ai812380163'
+
+        msg = MIMEText(loverWordsToEmail, 'plain', 'utf-8')  # 中文需参数‘utf-8'，单字节字符不需要
+        msg['Subject'] = Header(subject, 'utf-8')
+        msg['From'] = '段奇越<duanqiyue666@163.com>'
+        msg['To'] = receiver
+        smtp = smtplib.SMTP()
+        smtp.connect('smtp.163.com')
+        smtp.login(username, password)
+        smtp.sendmail(sender, receiver, msg.as_string())
+        smtp.quit()
+        print "成功"
 
 
 

@@ -2,6 +2,6 @@
 import QQSendMessage as qsm
 
 def start():
-    qsm.TestTK().createTk("沙雕发消息    v0.0.4")
+    qsm.TestTK().createTk("沙雕发消息    v0.0.5")
 
 start()
