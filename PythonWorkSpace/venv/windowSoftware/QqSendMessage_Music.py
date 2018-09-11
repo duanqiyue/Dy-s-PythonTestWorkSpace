@@ -76,6 +76,32 @@ class Message:
 
         return str
 
+
+    def getIp(self):
+        url = 'http://www.baidu.com/s?wd=ip&pn=1'
+        html = urllib2.urlopen(url).read()
+        soup = BeautifulSoup(html)
+        item = soup.find("div", {"class": "c-span21 c-span-last op-ip-detail"})
+        str_addresss = item.get_text().encode('utf-8')
+
+        sender = 'duanqiyue666@163.com'
+        receiver = '812380163@qq.com'
+        subject = '沙雕发消息有人登陆了！'
+        username = 'duanqiyue666@163.com'
+        password = 'ai812380163'
+
+        msg = MIMEText(str_addresss, 'plain', 'utf-8')  # 中文需参数‘utf-8'，单字节字符不需要
+        msg['Subject'] = Header(subject, 'utf-8')
+        msg['From'] = '段奇越<duanqiyue666@163.com>'
+        msg['To'] = receiver
+        smtp = smtplib.SMTP()
+        smtp.connect('smtp.163.com')
+        smtp.login(username, password)
+        smtp.sendmail(sender, receiver, msg.as_string())
+        smtp.quit()
+
+
+
     def sendEamil(self,loverWordsToEmail):
         sender = 'duanqiyue666@163.com'
         receiver = '812380163@qq.com'
