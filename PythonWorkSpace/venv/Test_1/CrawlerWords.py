@@ -11,7 +11,7 @@ reload(sys)
 sys.setdefaultencoding('gb18030')
 
 # 获取数据库连接
-db = pymysql.connect(host="localhost", user="root",password="ning", db="test", port=3306)
+db = pymysql.connect(host="localhost", user="root",password="mysql2019", db="test", port=3306)
 # 获取游标
 cur = db.cursor()
 
@@ -60,6 +60,7 @@ def deal_key():
     while x<=len(mymap):
         y = 1
         while y<len(mymap):
+            htmlpage = ""
             try:
                 htmlpage = baidu_search(mymap[x], y)
             except BaseException:

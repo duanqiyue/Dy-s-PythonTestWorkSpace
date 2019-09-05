@@ -1,17 +1,20 @@
 #coding:utf-8
-import win32gui
-import os
-import win32con
-import win32api
-import win32clipboard as w
-import time
-import sys
-import urllib2
-import bs4
-from bs4 import BeautifulSoup
 import smtplib
-from email.mime.text import MIMEText
+import time
+import urllib2
+import win32api
+import win32con
+import win32clipboard as w
+import win32gui
 from email.header import Header
+from email.mime.text import MIMEText
+from bs4 import BeautifulSoup
+
+
+
+
+
+
 
 class Message:
     sendFlag = True
